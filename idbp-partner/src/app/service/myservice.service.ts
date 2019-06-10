@@ -7,9 +7,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class MyserviceService {
 
-  constructor(private http: HttpClient) { 
-
-  }
+  constructor(private http: HttpClient) { }
 
   setBank(bank:any):Observable<any>{
     return this.http.post<any>('/route/setBank',bank,{

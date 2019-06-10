@@ -1,10 +1,8 @@
 var express = require('express');
 var path = require('path');
 var session = require('express-session');
-var usermodel = require('./models/usermodel');
 
 var routes = require('./routes/routes');
-var posts = require('./routes/posts');
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -35,7 +33,7 @@ app.use((req,res,next)=>{
 app.use('/route',routes);
 
 app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'../dist/idbp/index.html'));
+    res.sendFile(path.join(__dirname,'../dist/idbp-partner/index.html'));
 });
 
 // to remove all the expired links. checks every 2 minutes

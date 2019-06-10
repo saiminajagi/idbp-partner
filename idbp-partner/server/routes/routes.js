@@ -15,7 +15,7 @@ routes.use(bodyParser.json());
 var sess;
 
 routes.route('/publishApi')
-.post((req,res)=>{
+.post(urlencodedParser,(req,res)=>{
     api = req.body.apis;
     value = req.body.value;
     bank = req.body.bank;
@@ -30,7 +30,10 @@ routes.route('/publishApi')
 })
 
 routes.route('/setbank')
-.post((req,res)=>{
+.post(urlencodedParser,(req,res)=>{
     var sess = req.session;
     sess.bank = req.body.bank;
+    console.log("bank set as: "+sess.bank);
 })
+
+module.exports = routes;

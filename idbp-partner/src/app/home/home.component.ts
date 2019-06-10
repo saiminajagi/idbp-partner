@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private myservice: MyserviceService) { 
     this.route.params.subscribe( params => {
       console.log(params);
+      console.log("came here");
       var obj = {
         bank : params['bankname']
       }
