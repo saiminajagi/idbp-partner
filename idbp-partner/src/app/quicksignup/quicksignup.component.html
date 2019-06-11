@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <div class="container" *ngIf="!sent; else ElseBlock">
+      <h1>Welcome Back to IBM Digital Banking Platform</h1><br>
+      <div class="row justify-content-center">
+      <div class="col-md-6">
+      <div class="card">
+      <header class="card-header">
+        <h4 class="card-title mt-2">Quick Sign Up</h4>
+      </header>
+      <article class="card-body">
+          <form [formGroup]="QuickSignUpForm" (ngSubmit) = "onSubmit()">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              
+              <div class="form-group">
+                  <label for="exampleInputName">Name</label>
+                  <input type="text" class="form-control" formControlName="name" id="exampleInputName" aria-describedby="NameHelp" placeholder="Enter Your Name">
+                </div>
+              <div class="form-group">
+                  <label for="exampleInputOrganisation">Organisation Name</label>
+                  <input type="email" class="form-control" formControlName="org" id="exampleInputOrganisation" aria-describedby="organisationHelp" placeholder="Enter Organisation Name">
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputPass1">Password</label>
+                <input type="password" class="form-control" formControlName="pass" id="exampleInputPass1" placeholder="Enter Password">
+              </div>
+
+              <button type="submit" class="btn btn-primary sbmt">Submit</button>
+            </form>
+      </article> <!-- card-body end .// -->
+      </div> <!-- card.// -->
+      </div> <!-- col.//-->
+      </div> <!-- row.//-->
+
+    </div>
+      <!--container end.//-->
+
+    <ng-template #ElseBlock>
+      <div class="message">
+        Thank You for Signing Up with us. An email will be sent to you shortly with necessary credentials.
+      </div>
+    </ng-template>

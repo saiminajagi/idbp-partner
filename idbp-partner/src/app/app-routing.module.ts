@@ -4,12 +4,14 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { QuicksignupComponent } from './quicksignup/quicksignup.component';
 
 const routes: Routes = [
   { path: 'home/:bankname', component: HomeComponent},
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'quickSignup', component: QuicksignupComponent}
 ];
 
 @NgModule({
