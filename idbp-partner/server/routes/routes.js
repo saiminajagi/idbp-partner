@@ -53,6 +53,7 @@ routes.route('/quickSignupConfirm')
     });
     newqs.save();
 
+    // ============================ GENERATING A TOKEN ========================
     TokenObj = {
         "username": "amit",
         "password": "Good@luck#1",
@@ -64,6 +65,7 @@ routes.route('/quickSignupConfirm')
     var tokenobjstring = JSON.stringify(TokenObj);
     var baseUrl = "https://platform.9.202.177.31.xip.io/api";
     var tokenUrl = baseUrl+"/token";
+
     var org = "think";
     var catalog = "sandbox";
     var user_registry = "sandbox-catalog";
@@ -81,18 +83,20 @@ routes.route('/quickSignupConfirm')
     backendCall.callCoreBackend(options,(err,res)=>{
         if(!err){
             //var response = JSON.stringify(res);
-            var access_token = res.access_token;
+           
             console.log("token response receieved:" + res.access_token);
             // ================================== CREATING A NEW USER =============================
             //create a user account.
             var date = new Date();
+            date = date+"T06:40:40.685Z".toString();
 
+            var access_token = "Bearer "+res.access_token;
             var userObj = {
                 "type": "user",
                 "api_version": "2.0.0",
                 "name": req.body.name,
                 "title": req.body.name,
-                "summary": "owner of consumer org "+req.body.name,
+                "summary": "owner of consumer org"+ req.body.name,
                 "state": "enabled",
                 "identity_provider": "sandbox-idp",
                 "username": req.body.name,
@@ -101,40 +105,42 @@ routes.route('/quickSignupConfirm')
                 "email": req.body.email,
                 "first_name": req.body.name,
                 "last_name": req.body.name,
-                "last_login_at": date+"T06:40:40.685Z",
-                "created_at": date+"T06:40:40.685Z",
-                "updated_at": date+"T06:40:40.685Z"
+                "last_login_at": "2019-06-11T06:40:40.685Z",
+                "created_at": "2019-06-11T06:40:40.685Z",
+                "updated_at": "2019-06-11T06:40:40.685Z"
             }
             var userObjString = JSON.stringify(userObj);
 
-            var userURL = baseUrl+"user-resgistries/"+org+"/"+user_registry+"/users";
+            var userURL = baseUrl+"/user-registries/"+org+"/"+user_registry+"/users";
             var options = {
                 "method": "POST",
                 "url" : userURL,
                 "headers" : {
                     'Content-Type':'application/json',
-                    'Accept' : 'application/json'
+                    'Accept' : 'application/json',
+                    'Authorization' : access_token
                 },
                 "body" : userObjString
             };
 
             backendCall.callCoreBackend(options,(err,res)=>{
                 if(!err){
-                    console.log("user object response received"+res.url);
+                    console.log("access token to create an org: "+access_token);
+                    console.log("user object response received: "+res.url);
                     // ================================== CREATING AN ORGANISATION =============================
                     var owner_url = res.url;
                     var org_url = baseUrl+"/catalogs/"+org+"/"+catalog+"/consumer-orgs";
                     var orgobj = {
                         "type": "consumer_org",
                         "api_version": "2.0.0",
-                        "name": req.body.name,
-                        "title": req.body.name,
-                        "summary": req.body.name+" created from provider rest api using postman",
+                        "name": req.body.org,
+                        "title": req.body.org,
+                        "summary": req.body.org+" created from provider rest api using postman",
                         "state": "enabled",
                         "owner_url": owner_url,
                      
-                        "created_at": date+"T07:36:00.223Z",
-                        "updated_at": date+"T07:36:00.223Z"
+                        "created_at": "2019-06-11T06:40:40.685Z",
+                        "updated_at": "2019-06-11T06:40:40.685Z"
                     }
                     var orgobjString = JSON.stringify(orgobj);
 
@@ -143,7 +149,8 @@ routes.route('/quickSignupConfirm')
                         "url" : org_url,
                         "headers" : {
                             'Content-Type':'application/json',
-                            'Accept' : 'application/json'
+                            'Accept' : 'application/json',
+                            'Authorization' : access_token
                         },
                         "body" : orgobjString
                     };
@@ -164,8 +171,8 @@ routes.route('/quickSignupConfirm')
                                 "redirect_endpoints": [
                                   "http://sivan.ge/pof"
                                 ],
-                                "created_at": date+"T08:36:00.223Z",
-                                "updated_at": date+"T08:36:00.223Z"
+                                "created_at": "2019-06-11T06:40:40.685Z",
+                                "updated_at": "2019-06-11T06:40:40.685Z"
                               }
                               var appObjString = JSON.stringify(appObj);
 
@@ -176,7 +183,8 @@ routes.route('/quickSignupConfirm')
                                 "url" : app_url,
                                 "headers" : {
                                     'Content-Type':'application/json',
-                                    'Accept' : 'application/json'
+                                    'Accept' : 'application/json',
+                                    'Authorization' : access_token
                                 },
                                 "body" : appObjString
                             };
@@ -210,8 +218,8 @@ routes.route('/quickSignupConfirm')
                                                     "product_url": prod_url,
                                                     "plan": "default-plan",
                                                     "state_pending": "enabled",
-                                                    "created_at": date+"T08:11:20.461Z",
-                                                    "updated_at": date+"T08:11:20.461Z"
+                                                    "created_at": "2019-06-11T06:40:40.685Z",
+                                                    "updated_at": "2019-06-11T06:40:40.685Z"
                                                 }
                                                 var subobjstring = JSON.stringify(subobj);
                                                 var options = {
@@ -219,7 +227,8 @@ routes.route('/quickSignupConfirm')
                                                     "url" : sub_url,
                                                     "headers" : {
                                                         'Content-Type':'application/json',
-                                                        'Accept' : 'application/json'
+                                                        'Accept' : 'application/json',
+                                                        'Authorization' : access_token
                                                     },
                                                     "body" : subobjstring
                                                 };
@@ -234,7 +243,7 @@ routes.route('/quickSignupConfirm')
                                             }
                                         }
                                         //all apps have been subscribed.
-                                        sendmail();
+                                        //sendmail();
                                     })
                                 })
                         }else{
