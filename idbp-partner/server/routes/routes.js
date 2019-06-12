@@ -45,11 +45,15 @@ routes.route('/quickSignupConfirm')
 .post((req,res)=>{
     var hashpwd = passwordHash.generate(req.body.pass);
 
+    var sess = req.session;
+    var bank = sess.bank;
+
     var newqs = new qsmodel({
         email: req.body.email,
         name: req.body.name,
         org : req.body.org,
-        pass : hashpwd
+        pass : hashpwd,
+        qs : false
     });
     newqs.save();
 
@@ -189,6 +193,9 @@ routes.route('/quickSignupConfirm')
 
                                 backendCall.callCoreBackend(options,(err,res)=>{
                                     console.log("app creation response :");
+                                    sess.clientID = res.client_id;
+                                    sess.clientSecret = res.client_secret;
+
                                     console.log("client ID: "+res.client_id);
                                     console.log("client secret: "+res.client_secret);
                                     // ================================== LIST OF ALL APIS =============================
@@ -246,8 +253,11 @@ routes.route('/quickSignupConfirm')
                                                 })
                                             }
                                         }
+                                        //set that quick signup is completed.
+                                        qsmodel.findOneAndUpdate({email: req.body.email},{qs: true},{new :true},(err,doc)=>{});
+                                        console.log("client id and secret before sending mail: "+sess.clientId+" "+sess.clientSecret);
                                         //all apps have been subscribed.
-                                        //sendmail();
+                                        sendmail(req.body.email,bank,req.body.name,sess.clientID,sess.clientSecret);
                                     })
                                 })
                         }else{
@@ -315,4 +325,74 @@ routes.route('/getapilist')
 
 })
 
+function sendmail(email,bank,username,clientID,clientSecret){
+    var link = `http://localhost:3000/route/confirm/${ts}/${email}`;
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            // user: process.env.GMAIL_USER,
+            // pass: process.env.GMAIL_PASS
+            user : 'tushartdm117@gmail.com',
+            pass : 'fcb@rc@M$N321'
+        }
+        });
+
+        var mailOptions = {
+            from: 'tushartdm117@gmail.com',
+            to: `${email}`,
+            subject: 'IDBP Bank portal credentials',
+            text: 'That was easy!',
+            html : `
+            <html>
+            <head>
+                <style>
+                    .maindiv{
+                        box-shadow: 5px 5px 10px grey;
+                        margin-left: 35%;
+                        border: solid 2px grey;
+                        width: 550px;
+                        margin-top: 20px;
+                        padding-left: 35px;
+                        padding-bottom: 20px;
+                        border-radius: 20px;
+                        padding-top: 10px;
+                    }
+                    h2{
+                        margin-left: 44%;
+                        color:rgb(91, 91, 204);
+                    }
+
+                    a{
+                        text-decoration: none;
+                        color:rgb(83, 134, 6)
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="maindiv">
+                    <h2> IDBP Partner Portal</h2>
+                    <p> Welcome!! you are now successfully registered to ${bank} bank Api Portal (http://localhost:9000/home/${bank}). 
+                        You have complete access to all our API's in sandbox environment  </p>
+                    <h4> Here are the next steps: </h4>
+                        <p> - Login to our API Portal (https://portal.9.202.177.31.xip.io/think/sandbox/) with your credentials furnished during registration </p>
+                        <p> - username : ${username} </p>
+                        <p> - explore our APIs and use below credentials to test our APIs </p>
+                        <p> - here are APIkeys for testing our APIs in our sandbox environment </p>
+                        <p> Client ID : ${clientID} </p>
+                        <p> Client Secret : ${clientSecret} </p>
+                        <p> once you create your awesome web or mobile application and test in our sandbox environment you can register interest to use our PROD
+                            environment(more info in Getting started link in our site https://localhost:9000/gettingstarted ) </p>
+                </div>
+            </body>
+        </html> `
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+        });
+}
 module.exports = routes;

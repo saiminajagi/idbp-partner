@@ -4,7 +4,8 @@ var api = mongoose.Schema({
     email : String,
     name : String,
     org : String,
-    pass : String
+    pass : String,
+    qs : Boolean
 },{
     timestamp : true
 });
