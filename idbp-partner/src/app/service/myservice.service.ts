@@ -50,6 +50,14 @@ export class MyserviceService {
     })
   }
 
+
+  getAPIList(){
+    return this.http.get<any>('/route/getapilist',{
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    });
+  }
+
   // createAPIAccount(obj):Observable<any>{
   //   return this.http.post()
   // }

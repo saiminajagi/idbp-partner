@@ -1,36 +1,38 @@
-<div class="container">
-  <div class="row">
-    <div class="card-deck">
-        <div class="col-sm-4">
-            <a routerLink="/apilist" class="custom-card">
-              <div class="card h-100" >
-                  <div class="card-header">API PRODUCTS</div>
-                    <div class="card-body">
-                    <p class="card-text">Edit, assemble, secure and test APIs. Package APIs using products for publishing to consumers.</p>
-                  </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-4">
-              <a routerLink="/support" class="custom-card">
-                <div class="card h-100">
-                    <div class="card-header">LEARN MORE</div>
-                      <div class="card-body">
-                      <p class="card-text">Documentation and tutorials with step-by-step instructions.</p>
-                    </div>
-                </div>
-              </a>
-          </div>
-          <div class="col-sm-4">
-              <a routerLink="/support" class="custom-card">
-                <div class="card h-100">
-                  <div class="card-header">CONNECT</div>
-                    <div class="card-body">
-                      <p class="card-text">Find Expert answers in IDBP community forum.</p>
-                    </div>
-                </div>
-              </a>
-          </div>
+<ngb-carousel>
+  <ng-template ngbSlide>
+    <img [src]="image" alt="Random first slide">
+    <div class="carousel-caption">
+      <h2>
+        Brace Yourselves.
+        <br>
+        APIs are coming.
+      </h2>
+      <p>
+        Explore, subscribe to and be creative with our APIs.
+        <br>
+        We can't wait to see what you come up with!
+      </p>
+      <a routerLink="/home">Explore API Documentation</a>
+
     </div>
+  </ng-template>
+</ngb-carousel>
+
+<br><br>
+
+<div class="apiproductsfull">
+  <div class="apiproducts">
+    <h3>API Products</h3>
+    <a routerLink="/apiproducts">See all products</a>
   </div>
+
+  <div class="row">
+        <div class="col-sm-4" *ngFor=" let api of apilist">
+            <div class="card">
+                <div class="card-body">
+                  <a routerLink="/home"><h5 class="card-title">{{api | uppercase}}</h5></a>
+              </div>
+        </div>
+    </div>
 </div>
+

@@ -83,7 +83,7 @@ routes.route('/quickSignupConfirm')
     backendCall.callCoreBackend(options,(err,res)=>{
         if(!err){
             //var response = JSON.stringify(res);
-           
+
             console.log("token response receieved:" + res.access_token);
             // ================================== CREATING A NEW USER =============================
             //create a user account.
@@ -138,7 +138,7 @@ routes.route('/quickSignupConfirm')
                         "summary": req.body.org+" created from provider rest api using postman",
                         "state": "enabled",
                         "owner_url": owner_url,
-                     
+
                         "created_at": "2019-06-11T06:40:40.685Z",
                         "updated_at": "2019-06-11T06:40:40.685Z"
                     }
@@ -192,7 +192,7 @@ routes.route('/quickSignupConfirm')
                                 backendCall.callCoreBackend(options,(err,res)=>{
                                     console.log("app creation response :");
                                     console.log("client ID: "+res.client_id);
-                                    console.log("client secret: "+res.client_secret);  
+                                    console.log("client secret: "+res.client_secret);
                                     // ================================== LIST OF ALL APIS =============================
                                     var list_url = baseUrl+"/catalogs/"+org+"/"+catalog+"/products?";
                                     var options = {
@@ -202,7 +202,7 @@ routes.route('/quickSignupConfirm')
                                             'Content-Type':'application/json',
                                             'Accept' : 'application/json'
                                         },
-                                    };      
+                                    };
                                     backendCall.callCoreBackend(options,(err,res)=>{
                                         console.log("list of all api response "+res.total_results);
                                         //get the total api and loop through each of them.
@@ -258,6 +258,15 @@ routes.route('/quickSignupConfirm')
             console.log("error at generating a token "+err);
         }
     })
+})
+
+routes.route('/getapilist')
+.get((req,res)=>{
+    var sess = req.session;
+    var myObj = {
+      api_name: ["atm branch locator", "cards", "insurance", "payments", "accounts", "pay with points"]
+    }
+    res.json(myObj)
 })
 
 module.exports = routes;

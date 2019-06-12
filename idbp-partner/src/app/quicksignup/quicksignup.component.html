@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <div class="container" *ngIf="!sent; else ElseBlock">
-      <h1>Welcome Back to IBM Digital Banking Platform</h1><br>
+      <h1>Welcome! Have a quick sign-up to start testing our APIs</h1><br>
       <div class="row justify-content-center">
       <div class="col-md-6">
       <div class="card">
@@ -14,7 +14,7 @@
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
               </div>
-              
+
               <div class="form-group">
                   <label for="exampleInputName">Name</label>
                   <input type="text" class="form-control" formControlName="name" id="exampleInputName" aria-describedby="NameHelp" placeholder="Enter Your Name">
@@ -41,6 +41,7 @@
 
     <ng-template #ElseBlock>
       <div class="message">
-        Thank You for Signing Up with us. An email will be sent to you shortly with necessary credentials.
+        <h4>Thank You for interest with us.</h4>
+        <p>An email will be sent to you shortly with necessary credentials.</p>
       </div>
     </ng-template>

@@ -1,0 +1,36 @@
+
+.dropdown:hover>.dropdown-menu {
+  display: inline;
+}
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
+.seperateLi{
+  margin-left: 20px;
+}
+
+.material-icons{
+  margin-right: 5px;
+}
+
+.logo{
+  padding-right: 50px;
+  padding-left: 8px;
+  background-color: #ffffff;
+}
+
+a{
+  text-decoration: none;
+  // color: #047cc0;
+}
+
+i{
+  margin-right: 10px;
+}
+
+.navbar{
+  padding: 0px ;
+}
