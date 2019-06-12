@@ -82,10 +82,6 @@ routes.route('/quickSignupConfirm')
 
     backendCall.callCoreBackend(options,(err,res)=>{
         if(!err){
-<<<<<<< HEAD
-            //var response = JSON.stringify(res);
-=======
->>>>>>> 3241930b928c5181024eed34bc1662f49e8d83e9
 
             console.log("token response receieved:" + res.access_token);
             // ================================== CREATING A NEW USER =============================
@@ -140,11 +136,7 @@ routes.route('/quickSignupConfirm')
                         "summary": req.body.org+" created from provider rest api using postman",
                         "state": "enabled",
                         "owner_url": owner_url,
-<<<<<<< HEAD
 
-=======
-                    
->>>>>>> 3241930b928c5181024eed34bc1662f49e8d83e9
                         "created_at": "2019-06-11T06:40:40.685Z",
                         "updated_at": "2019-06-11T06:40:40.685Z"
                     }
@@ -216,7 +208,7 @@ routes.route('/quickSignupConfirm')
                                         {
                                             //get the product url
                                             if(res.results[i].state == "published"){
-                                                
+
                                                 var prod_url = res.results[i].url;
                                                 console.log("product url of product "+i+": "+prod_url);
                                                 var subobj = {
@@ -247,7 +239,7 @@ routes.route('/quickSignupConfirm')
                                                 console.log("subscribing for product: "+title);
                                                     console.log("subscription for app done: "+JSON.stringify(res));
                                                     if(!err){
-                                                        
+
                                                     }else{
                                                         console.log();
                                                     }
