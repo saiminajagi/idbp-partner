@@ -266,11 +266,53 @@ routes.route('/quickSignupConfirm')
 
 routes.route('/getapilist')
 .get((req,res)=>{
-    var sess = req.session;
-    var myObj = {
-      api_name: ["atm branch locator", "cards", "insurance", "payments", "accounts", "pay with points"]
+  TokenObj = {
+    "username": "amit",
+    "password": "Good@luck#1",
+    "realm": "provider/default-idp-2",
+    "client_id": "idbpappid",
+    "client_secret": "idbpappsecret",
+    "grant_type": "password"
+  };
+  var tokenobjstring = JSON.stringify(TokenObj);
+  var baseUrl = "https://platform.9.202.177.31.xip.io/api";
+  var tokenUrl = baseUrl+"/token";
+
+  var org = "think";
+  var catalog = "sandbox";
+
+  var options = {
+      "method": "POST",
+      "url" : tokenUrl,
+      "headers" : {
+          'Content-Type':'application/json',
+          'Accept' : 'application/json'
+      },
+      "body" : tokenobjstring
+  };
+
+  backendCall.callCoreBackend(options,(err,token_response)=>{
+    if(!err){
+      var access_token = "Bearer "+token_response.access_token;
+      var list_url = baseUrl+"/catalogs/"+org+"/"+catalog+"/products?";
+      var options = {
+          "method": "GET",
+          "url" : list_url,
+          "headers" : {
+              'Accept' : 'application/json',
+              'Authorization' : access_token
+          },
+      };
+      backendCall.callCoreBackend(options,(err,response)=>{
+        res.json(response);
+      });
+
+    }else{
+      console.log("error at generating token");
     }
-    res.json(myObj)
+  });
+
+
 })
 
 module.exports = routes;

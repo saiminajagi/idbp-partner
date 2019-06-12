@@ -13,7 +13,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 export class HomeComponent implements OnInit {
 
 image: any = '../../assets/carosel.jpg';
-apilist: Array<String> = ['atm branch locator', 'insurance', 'payments']
+apilist: Array<String> = ['atm branch locator', 'insurance', 'payments'];
 
   constructor(private route: ActivatedRoute, private myservice: MyserviceService, config: NgbCarouselConfig) {
 

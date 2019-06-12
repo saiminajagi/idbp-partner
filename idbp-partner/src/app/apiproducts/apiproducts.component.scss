@@ -1,0 +1,48 @@
+.apiproductsfull{
+  margin: 24px 48px;
+  padding: 0px 15px;
+}
+
+.apiproducts{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.apiproductsheader>h3{
+  border-bottom: solid 2px #5a60b8;
+  padding-bottom: 11px;
+}
+
+.card{
+  margin: 5px 10px 15px 10px;
+}
+
+img{
+    vertical-align: baseline;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #dfe3e6;
+    border-radius: 100%;
+}
+
+.forsameline{
+  display: inline-block;
+}
+
+.checked{
+  color:  #5a60b8;
+}
+
+.card-title{
+  margin-bottom: 35px;
+}
+
+.card-body{
+  margin-bottom: 70px;
+}
+
