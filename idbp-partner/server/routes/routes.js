@@ -82,7 +82,10 @@ routes.route('/quickSignupConfirm')
 
     backendCall.callCoreBackend(options,(err,res)=>{
         if(!err){
+<<<<<<< HEAD
             //var response = JSON.stringify(res);
+=======
+>>>>>>> 3241930b928c5181024eed34bc1662f49e8d83e9
 
             console.log("token response receieved:" + res.access_token);
             // ================================== CREATING A NEW USER =============================
@@ -100,7 +103,7 @@ routes.route('/quickSignupConfirm')
                 "state": "enabled",
                 "identity_provider": "sandbox-idp",
                 "username": req.body.name,
-                "password": "Good@luck#1",
+                "password": req.body.pass,
                 "force_password_change": false,
                 "email": req.body.email,
                 "first_name": req.body.name,
@@ -125,7 +128,6 @@ routes.route('/quickSignupConfirm')
 
             backendCall.callCoreBackend(options,(err,res)=>{
                 if(!err){
-                    console.log("access token to create an org: "+access_token);
                     console.log("user object response received: "+res.url);
                     // ================================== CREATING AN ORGANISATION =============================
                     var owner_url = res.url;
@@ -138,7 +140,11 @@ routes.route('/quickSignupConfirm')
                         "summary": req.body.org+" created from provider rest api using postman",
                         "state": "enabled",
                         "owner_url": owner_url,
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 3241930b928c5181024eed34bc1662f49e8d83e9
                         "created_at": "2019-06-11T06:40:40.685Z",
                         "updated_at": "2019-06-11T06:40:40.685Z"
                     }
@@ -199,8 +205,8 @@ routes.route('/quickSignupConfirm')
                                         "method": "GET",
                                         "url" : list_url,
                                         "headers" : {
-                                            'Content-Type':'application/json',
-                                            'Accept' : 'application/json'
+                                            'Accept' : 'application/json',
+                                            'Authorization' : access_token
                                         },
                                     };
                                     backendCall.callCoreBackend(options,(err,res)=>{
@@ -210,6 +216,7 @@ routes.route('/quickSignupConfirm')
                                         {
                                             //get the product url
                                             if(res.results[i].state == "published"){
+                                                
                                                 var prod_url = res.results[i].url;
                                                 console.log("product url of product "+i+": "+prod_url);
                                                 var subobj = {
@@ -222,6 +229,8 @@ routes.route('/quickSignupConfirm')
                                                     "updated_at": "2019-06-11T06:40:40.685Z"
                                                 }
                                                 var subobjstring = JSON.stringify(subobj);
+                                                var sub_url = baseUrl+"/apps/"+org+"/"+catalog+"/"+req.body.org+"/app-"+req.body.org+"/subscriptions";
+                                                // console.log("......"+sub_url);
                                                 var options = {
                                                     "method": "POST",
                                                     "url" : sub_url,
@@ -232,12 +241,15 @@ routes.route('/quickSignupConfirm')
                                                     },
                                                     "body" : subobjstring
                                                 };
+                                                var title = res.results[i].title;
                                                 backendCall.callCoreBackend(options,(err,res)=>{
-                                                    console.log("subscription for app done: "+res)
+                                                    console.log("*********************************************************************************");
+                                                console.log("subscribing for product: "+title);
+                                                    console.log("subscription for app done: "+JSON.stringify(res));
                                                     if(!err){
-
+                                                        
                                                     }else{
-                                                        console.log()
+                                                        console.log();
                                                     }
                                                 })
                                             }
