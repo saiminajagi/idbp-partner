@@ -45,22 +45,5 @@ export class QuicksignupComponent implements OnInit {
     (error: any) => console.log('error')
   );
 
-  // this.myservice.getAPIToken(myObj)
-  // .subscribe((data)=>{
-  //   console.log("token returned->"+data);
-  //   //now data has the token
-  //   this.token = data;
-  //   //now create an user account
-  //   var accountObj = {
-  //     token : data,
-  //     org : "think",
-  //     userregistry : "sandbox-catalog"
-  //   }
-  //   // this.myservice.createAPIAccount(accountObj)
-  //   // .subscribe((data)=>{
-  //   //   console.log(data);
-  //   // },(err)=> console.log(err));
-  // },(err)=>console.log(err));
-
   }
 }
