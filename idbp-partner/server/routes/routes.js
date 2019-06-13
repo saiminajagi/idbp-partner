@@ -46,6 +46,7 @@ routes.route('/quickSignupConfirm')
     var hashpwd = passwordHash.generate(req.body.pass);
 
     var sess = req.session;
+    sess.email = req.body.email;
     var bank = sess.bank;
 
     var newqs = new qsmodel({
@@ -325,6 +326,16 @@ routes.route('/getapilist')
 
 })
 
+routes.route('/getInt')
+.get((req,res)=>{
+  var sess = req.session;
+
+  qsmodel.find({email:sess.email},(err,doc)=>{
+
+    res.json(doc[0]);
+  })
+})
+
 function sendmail(email,bank,username,clientID,clientSecret){
     var link = `http://localhost:3000/route/confirm/${ts}/${email}`;
     var transporter = nodemailer.createTransport({
@@ -371,7 +382,7 @@ function sendmail(email,bank,username,clientID,clientSecret){
             <body>
                 <div class="maindiv">
                     <h2> IDBP Partner Portal</h2>
-                    <p> Welcome!! you are now successfully registered to ${bank} bank Api Portal (http://localhost:9000/home/${bank}). 
+                    <p> Welcome!! you are now successfully registered to ${bank} bank Api Portal (http://localhost:9000/home/${bank}).
                         You have complete access to all our API's in sandbox environment  </p>
                     <h4> Here are the next steps: </h4>
                         <p> - Login to our API Portal (https://portal.9.202.177.31.xip.io/think/sandbox/) with your credentials furnished during registration </p>

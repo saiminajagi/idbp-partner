@@ -58,6 +58,20 @@ export class MyserviceService {
     });
   }
 
+  getInterest(){
+    return this.http.get<any>('/route/getInt',{
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    });
+  }
+
+  sendInterest(obj:any):Observable<any>{
+    return this.http.post<any>('http://localhost:3000/route/sendInterest',{
+      headers:
+      new HttpHeaders({'Content-Type':'application/json',
+                       'Acccept':'application/json' })
+    })
+  }
   // createAPIAccount(obj):Observable<any>{
   //   return this.http.post()
   // }

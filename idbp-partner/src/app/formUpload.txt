@@ -24,7 +24,7 @@ fileData:File = null // declare file data and initialise it to null
 fileProgress(fileInput: any) {
     this.fileData = <File>fileInput.target.files[0];
 }
- 
+
 onSubmit() {
     const formData = new FormData();
     formData.append('file', this.fileData);
@@ -34,3 +34,24 @@ onSubmit() {
         alert('SUCCESS !!');
       })
 }
+
+============================Ignore====================================
+<div class="shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 41rem;">
+    <h3>Document upload</h3>
+    <form [formGroup]="fileUploadForm" (ngSubmit)="onfileSubmit()">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+              <label for="exampleInputUploadCertificate"><b>Aadhar card</b></label>
+              <input type="file" class="form-control" formControlName="file1" id="exampleInputUploadCertificate" placeholder="Browse">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+              <label for="exampleInputUploadCertificate"><b>PAN card</b></label>
+              <input type="file" class="form-control" formControlName="file2" id="exampleInputUploadCertificate" placeholder="Browse">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

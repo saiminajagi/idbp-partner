@@ -14,15 +14,25 @@ export class RegisterinterestComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private myservice: MyserviceService) { }
 
+  onInterestSubmit(){
+    this.myservice.getInterest()
+    .subscribe((data)=>{
+      console.log(data);
+      this.interestsubmit = 1;
+      //this data has the details.
+      this.myservice.sendInterest(data)
+      .subscribe((data)=>{
+        console.log(data);
+      },(err)=> console.log(err));
+
+    },(err)=>console.log(err));
+  }
+
   ngOnInit() {
     this.fileUploadForm = this.fb.group({
       file1: ['', [Validators.required]],
       file2: ['', [Validators.required]]
     });
-  }
-
-  onInterestSubmit(){
-    this.interestsubmit = 1;
   }
 
   onfileSubmit(){
@@ -31,21 +41,11 @@ export class RegisterinterestComponent implements OnInit {
       file2: this.fileUploadForm.controls.file2.value
     };
 
-    this.myservice.storeFiles(myObj)
+    this.myservice.sendFilestoBM(myObj)
     .subscribe(
       (data: any) => {
         console.log(data);
-        this.myservice.getFiles()
-        .subscribe(
-          (data) => {
-          console.log(data);
-          this.myservice.sendFilestoBM(data)
-          .subscribe(
-            (data: any) => {
-              console.log(data);
-            },(err: any) => console.log(err));
-        }, (err) => console.log(err));
-      },(err: any) => console.log(err));
+      }, (err: any) => console.log(err));
 
 
   }
