@@ -58,6 +58,7 @@ export class MyserviceService {
     });
   }
 
+<<<<<<< HEAD
   getInterest(){
     return this.http.get<any>('/route/getInt',{
       headers :
@@ -75,4 +76,13 @@ export class MyserviceService {
   // createAPIAccount(obj):Observable<any>{
   //   return this.http.post()
   // }
+=======
+  sendFiles(obj:any):Observable<any>{
+    console.log("send files service called");
+    return this.http.post('http://localhost:3000/route/partnerfile',obj,{
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    })
+  }
+>>>>>>> ced1cb049c02aa4bad245caf57449c56cb43bac7
 }

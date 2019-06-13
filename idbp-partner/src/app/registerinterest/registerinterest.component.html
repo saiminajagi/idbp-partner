@@ -18,25 +18,33 @@
 
 
 <!-- =====================Step 2.2===================== -->
-<div class="step2">
+<!-- <div class="step2">
   <br>
   <div class="shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 41rem;">
     <h3>Document upload</h3>
-    <form [formGroup]="fileUploadForm" (ngSubmit)="onfileSubmit()">
+    <form [formGroup]="fileForm" (ngSubmit)="onfileSubmit()">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-              <label for="exampleInputUploadCertificate"><b>Aadhar card</b></label>
-              <input type="file" class="form-control" formControlName="file1" id="exampleInputUploadCertificate" placeholder="Browse">
+              <label for="UploadCertificate1"><b>Aadhar card</b></label>
+              <input type="file" formControlName="file1" class="form-control" id="UploadCertificate1" placeholder="Browse">
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-              <label for="exampleInputUploadCertificate"><b>PAN card</b></label>
-              <input type="file" class="form-control" formControlName="file2" id="exampleInputUploadCertificate" placeholder="Browse">
+              <label for="UploadCertificate2"><b>PAN card</b></label>
+              <input type="file" class="form-control" formControlName="file2" id="UploadCertificate2" placeholder="Browse">
           </div>
         </div>
       </div>
     </form>
   </div>
+</div> -->
+
+<div>
+  <form action="/route/handlefiles" method="POST" enctype="multipart/form-data">
+    <input type="file" name="myFile">
+    <!-- <input type="file" (change)="onFileSelected($event)"> -->
+    <button type="submit" > Upload</button>
+  </form>
 </div>
