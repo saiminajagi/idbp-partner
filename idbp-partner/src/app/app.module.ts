@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuicksignupComponent } from './quicksignup/quicksignup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiproductsComponent } from './apiproducts/apiproducts.component';
+import { GettingstartedComponent } from './gettingstarted/gettingstarted.component';
+import { RegisterinterestComponent } from './registerinterest/registerinterest.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ApiproductsComponent } from './apiproducts/apiproducts.component';
     HomeComponent,
     QuicksignupComponent,
     ApiproductsComponent,
+    GettingstartedComponent,
+    RegisterinterestComponent,
   ],
   imports: [
     BrowserModule,

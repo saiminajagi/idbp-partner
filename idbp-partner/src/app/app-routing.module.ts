@@ -6,6 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { QuicksignupComponent } from './quicksignup/quicksignup.component';
 import { ApiproductsComponent } from './apiproducts/apiproducts.component';
+import { GettingstartedComponent } from './gettingstarted/gettingstarted.component';
+import { RegisterinterestComponent } from './registerinterest/registerinterest.component';
+
 
 const routes: Routes = [
   { path: 'home/:bankname', component: HomeComponent},
@@ -14,7 +17,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'quickSignup', component: QuicksignupComponent},
-  { path: 'apiproducts', component: ApiproductsComponent}
+  { path: 'apiproducts', component: ApiproductsComponent},
+  { path: 'gettingstarted', component: GettingstartedComponent },
+  { path: 'reginterest', component: RegisterinterestComponent }
 ];
 
 @NgModule({

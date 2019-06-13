@@ -1,0 +1,42 @@
+<!-- ===========================Step 2.1============================ -->
+<div class="step1">
+  <br>
+  <h3>Confirm interest</h3>
+  <div class="shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 22rem;">
+    <div *ngIf="!interestsubmit; else elseBlock">
+      <p>After you click submit, we'll approve your interest and respond you in registered email for further procedure</p>
+      <button type="button" (click)="onInterestSubmit()" class="btn btn-primary">Submit</button>
+    </div>
+    <ng-template #elseBlock>
+      <br>
+      <h4>Thank you for your interest.</h4>
+      <h6>Come back after approval.</h6>
+      <br>
+    </ng-template>
+  </div>
+</div>
+
+
+<!-- =====================Step 2.2===================== -->
+<div class="step2">
+  <br>
+  <div class="shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 41rem;">
+    <h3>Document upload</h3>
+    <form [formGroup]="fileUploadForm" (ngSubmit)="onfileSubmit()">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+              <label for="exampleInputUploadCertificate"><b>Aadhar card</b></label>
+              <input type="file" class="form-control" formControlName="file1" id="exampleInputUploadCertificate" placeholder="Browse">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+              <label for="exampleInputUploadCertificate"><b>PAN card</b></label>
+              <input type="file" class="form-control" formControlName="file2" id="exampleInputUploadCertificate" placeholder="Browse">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
