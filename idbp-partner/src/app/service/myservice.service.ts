@@ -58,7 +58,11 @@ export class MyserviceService {
     });
   }
 
-  // createAPIAccount(obj):Observable<any>{
-  //   return this.http.post()
-  // }
+  sendFiles(obj:any):Observable<any>{
+    console.log("send files service called");
+    return this.http.post('http://localhost:3000/route/partnerfile',obj,{
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    })
+  }
 }
