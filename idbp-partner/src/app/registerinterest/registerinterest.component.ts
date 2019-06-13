@@ -48,10 +48,6 @@ export class RegisterinterestComponent implements OnInit {
   //   console.log(this.fileArray);
   // }
 
-  onInterestSubmit(){
-    this.interestsubmit = 1;
-  }
-
   // onfileSubmit(){
 
   //   var formData1 = new FormData();

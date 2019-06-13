@@ -20,11 +20,11 @@ export class QuicksignupComponent implements OnInit {
       email:['',[Validators.required]],
       pass:['',[Validators.required]],
       name:['',[Validators.required]],
-      org: ['',[Validators.required]] 
+      org: ['',[Validators.required]]
     });
   }
   onSubmit(){
-    
+
     this.sent= 1;
 
     var myObj = {
