@@ -36,19 +36,6 @@ export class RegisterinterestComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
-  onfileSubmit(){
-    var myObj = {
-      file1: this.fileUploadForm.controls.file1.value,
-      file2: this.fileUploadForm.controls.file2.value
-    };
-
-    this.myservice.sendFilestoBM(myObj)
-    .subscribe(
-      (data: any) => {
-        console.log(data);
-      }, (err: any) => console.log(err));
-=======
   // fileProgress(fileInput: any) {
   //   this.fileData1 = <File>fileInput.target.files[0];
   //   this.fileData2 = <File>fileInput.target.files[1];
@@ -75,7 +62,6 @@ export class RegisterinterestComponent implements OnInit {
 
   //   this.myObj.push(formData1);
   //   this.myObj.push(formData2);
->>>>>>> ced1cb049c02aa4bad245caf57449c56cb43bac7
 
   //   this.myservice.sendFiles(this.myObj)
   //   .subscribe((data)=>{
