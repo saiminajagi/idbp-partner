@@ -1,0 +1,36 @@
+======================== HTML CODE ===========================
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3>Choose File</h3>
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="file" name="image"  />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+===================== TYPESCRIPT CODE =========================
+
+fileData:File = null // declare file data and initialise it to null
+
+fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+}
+ 
+onSubmit() {
+    const formData = new FormData();
+    formData.append('file', this.fileData);
+    this.http.post('url/to/your/api', formData)
+      .subscribe(res => {
+        console.log(res);
+        alert('SUCCESS !!');
+      })
+}
