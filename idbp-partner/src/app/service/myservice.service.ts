@@ -22,7 +22,7 @@ export class MyserviceService {
   constructor(private http: HttpClient) { }
 
   setBank(bank:any):Observable<any>{
-    return this.http.post<any>('/route/setBank',bank,{
+    return this.http.post<any>('/route/setbank',bank,{
       headers :
       new HttpHeaders({ 'Content-Type':'application/json'})
     })
@@ -66,10 +66,9 @@ export class MyserviceService {
   }
 
   sendInterest(obj:any):Observable<any>{
-    return this.http.post<any>('http://localhost:3000/route/sendInterest',{
+    return this.http.post<any>('http://localhost:3000/route/sendInterest',obj,{
       headers:
-      new HttpHeaders({'Content-Type':'application/json',
-                       'Acccept':'application/json' })
+      new HttpHeaders({'Content-Type':'application/json' })
     })
   }
   // createAPIAccount(obj):Observable<any>{

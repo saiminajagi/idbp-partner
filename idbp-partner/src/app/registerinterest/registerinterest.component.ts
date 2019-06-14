@@ -21,7 +21,7 @@ export class RegisterinterestComponent implements OnInit {
   onInterestSubmit(){
     this.myservice.getInterest()
     .subscribe((data)=>{
-      console.log(data);
+      console.log('signup details recived: '+JSON.stringify(data));
       this.interestsubmit = 1;
       //this data has the details.
       this.myservice.sendInterest(data)
