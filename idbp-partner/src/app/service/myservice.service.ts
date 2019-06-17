@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -89,10 +89,10 @@ export class MyserviceService {
   //   return this.http.post()
   // }
   sendFiles(obj:any):Observable<any>{
-    console.log("send files service called");
-    return this.http.post('http://localhost:3000/route/partnerfile',obj,{
+    return this.http.post('http://localhost:3000/files/fileupload',obj,{
       headers :
-      new HttpHeaders({ 'Content-Type':'application/json'})
+      new HttpHeaders({ 'Content-Type':'application/json',
+                        'Accept': 'application/json'})
     })
   }
 }

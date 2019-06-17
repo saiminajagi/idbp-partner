@@ -12,8 +12,8 @@ var backendCall = require('../utility');
 
 var routes = express.Router();
 
-var urlencodedParser = bodyParser.urlencoded({extended: true});
-routes.use(bodyParser.json());
+var urlencodedParser = bodyParser.urlencoded({limit:'50mb',extended: true});
+routes.use(bodyParser.json({limit:'50mb',extended:true}));
 
 var sess;
 
@@ -397,6 +397,11 @@ routes.route('/logout')
     res.json(sess.bank);
 })
 
+routes.route('/partnerfile')
+.post(urlencodedParser,(req,res)=>{
+    console.log("recieved the files: "+JSON.stringify(req.body));
+    res.json("reply from server");
+});
 
 function sendmail(email,bank,username,clientID,clientSecret){
     console.log(clientID+" "+clientSecret+" in mail function");

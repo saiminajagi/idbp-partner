@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { MyserviceService} from '../service/myservice.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-registerinterest',
@@ -12,11 +12,18 @@ export class RegisterinterestComponent implements OnInit {
 
   fileForm: FormGroup;
   interestsubmit: Number = 0;
-  fileData1: File = null;
-  fileData2: File = null;
-  fileArray: Array<2>;
+  fileData1: File;
+  fileData2: File;
+  @ViewChild('file1') User_Image;
+  uploadedFiles: Array < File > ;
   myObj: any;
-  constructor(private fb: FormBuilder, private myservice: MyserviceService, private http: HttpClient) { }
+  
+  constructor(private fb: FormBuilder, private myservice: MyserviceService, private http: HttpClient) {
+    this.fileForm = this.fb.group({
+      file1 : ['',Validators.required],
+      file2 : ['',Validators.required]
+    });
+   }
 
   onInterestSubmit(){
     this.myservice.getInterest()
@@ -32,59 +39,58 @@ export class RegisterinterestComponent implements OnInit {
     },(err)=>console.log(err));
   }
 
-  ngOnInit() {
+  ngOnInit() {  }
 
+
+  fileChange(element) {
+    //this.uploadedFiles = element.target.files;
+    if(element.target.files && element.target.files.length){
+      var [file] = element.target.files;
+      this.fileData1 = file;
+    }
   }
 
-  // fileProgress(fileInput: any) {
-  //   this.fileData1 = <File>fileInput.target.files[0];
-  //   this.fileData2 = <File>fileInput.target.files[1];
 
-  //   console.log("Number of files: "+fileInput.target.files.length);
-  //   for(let file of fileInput.target.files){
-  //     this.fileArray.push(file);
-  //   }
-  //   console.log("Files recieved are: ");
-  //   console.log(this.fileArray);
-  // }
+  onfileSubmit(){
 
-  // onfileSubmit(){
+    var formData = new FormData();
 
-  //   var formData1 = new FormData();
-  //   var formData2 = new FormData();
+    formData.append('excel', this.fileData1);
+    console.log(formData);
+    
+    const params = new HttpParams();
 
-  //   formData1.append('file',this.fileData1);
-  //   formData2.append('file',this.fileData2);
+    const options = {
+        params,
+        reportProgress: true,
+    };
 
-  //   this.myObj.push(formData1);
-  //   this.myObj.push(formData2);
+    // const req = new HttpRequest('POST', 'http://0.0.0.0:4000/v1/matric', formData, options);
+    // this.http.request(req).subscribe(console.log)
 
-  //   this.myservice.sendFiles(this.myObj)
-  //   .subscribe((data)=>{
-  //     console.log(data);
-  //   },(err)=>console.log(err));
-  // }
+    //====================================================================================================
+    // var Image = this.User_Image.nativeElement;
+    // if( Image.files && Image.files[0]){
+    //   this.fileData1 = Image.files[0]
+    // }
+    // var ImageFile:File = this.fileData1;
+    // console.log(ImageFile);
 
-  selectedFile:File = null;
-  fileArrayObj:File[] = [];
+    // var formData: FormData = new FormData();
+    // for (var i = 0; i < this.uploadedFiles.length; i++) {
+    //   formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
+    // } 
+    // formData.append('file1',ImageFile,ImageFile.name);
 
-  onFileSelected(event){
-    console.log(event.target.files[0]);
-    this.selectedFile = <File>event.target.files[0];
-
-    var fd = new FormData();
-    fd.append('file',this.selectedFile,this.selectedFile.name);
-
-    var myObj = {
-      file : fd
-    }
-    this.myservice.sendFiles(myObj)
+    // var myObj = {
+    //   name : "tushar",
+    //   file : formData 
+    // }
+    
+    this.myservice.sendFiles(formData)
     .subscribe((data)=>{
       console.log(data);
     },(err)=>console.log(err));
-
-    this.fileArrayObj.push(event.target.files[0]);
-    console.log("the file array recived is: "+JSON.stringify(this.selectedFile));
   }
 
   onUpload(){
