@@ -33,12 +33,6 @@ apilist: Array<String> = ['atm branch locator', 'insurance', 'payments'];
   }
 
   ngOnInit() {
-  //   this.myservice.getAPIList()
-  //   .subscribe((data) => {
-  //     this.apilist = data;
-  //   }, (err) => console.log(err));
   }
-
-
 
 }
