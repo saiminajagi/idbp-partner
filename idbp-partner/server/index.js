@@ -5,9 +5,10 @@ var session = require('express-session');
 var routes = require('./routes/routes');
 
 var mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/idbppartner',{useNewUrlParser: true},(err,db)=>{
- 
+
     if(err) console.log(err);
     else console.log("connection to db success");
 });
@@ -48,7 +49,7 @@ app.get('*',(req,res)=>{
 //             //convert the variable to int .
 //             if(doc[i].ts != "expired"){
 //                 var ts = parseInt(doc[i].ts);
-//                 if(cts - ts >= 86400000){  
+//                 if(cts - ts >= 86400000){
 //                     if(!doc[i].confirmation){
 //                         //delete the user
 //                         usermodel.findOneAndRemove({ts:ts},(err,doc)=> console.log(err));

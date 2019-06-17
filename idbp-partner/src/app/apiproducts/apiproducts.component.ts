@@ -10,18 +10,17 @@ import { MyserviceService } from '../service/myservice.service';
 export class ApiproductsComponent implements OnInit {
 
   image: any = '../../assets/product-icon.png';
-  apilist: any;
-
+  apilist: Array<String> = ['atm branch locator', 'insurance', 'payments','accounts', 'cards', 'customers', 'services'];
 
   constructor(private myservice: MyserviceService) {
-    this.myservice.getAPIList()
-    .subscribe((data) => {
-      console.log(data);
-      this.apilist = JSON.stringify(data);
-    }, (err) => console.log(err));
+    // this.myservice.getAPIList()
+    // .subscribe((data) => {
+    //   console.log(data);
+    //   this.apilist = JSON.stringify(data);
+    // }, (err) => console.log(err));
 
-    console.log(this.apilist.results[1].id+'hi');
-    console.log('sai');
+    // console.log(this.apilist.results[1].id+'hi');
+    // console.log('sai');
    }
 
   ngOnInit() {
