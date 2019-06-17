@@ -36,11 +36,7 @@ export class QuicksignupComponent implements OnInit {
     this.myservice.sendQuickSignUpDetails(myObj)
     .subscribe(
     (data : any) => {
-      if(data.status){
-        this.router.navigateByUrl('/dashboard');
-      }else{
-        alert(data.msg);
-      }
+      console.log(data);
     },
     (error: any) => console.log('error')
   );

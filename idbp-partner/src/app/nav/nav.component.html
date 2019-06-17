@@ -34,30 +34,34 @@ integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <!-- ===========================================If possible show here organization=========================================== -->
             <!-- <li *ngIf="login;"><a class="nav-link" routerLink="/dashboard"><span><i class='fas fa-desktop'></i></span>My Dashboard</a></li>
             <ng-template #dashboard>
               <div class="divider">.</div>
-            </ng-template>
+            </ng-template> -->
+            <li *ngIf="!login"><a class="nav-link py-0" routerLink="/quickSignup"><span></span>Create account</a></li>
+            <div class="divider">.</div>
             <div class="seperateLi">
-                <li *ngIf="!login; else elseBlock"><a class="nav-link" routerLink="/login"><span><i class='fas fa-user-alt'></i></span>Sign In</a></li>
+                <li *ngIf="!login; else elseBlock"><a class="nav-link py-0" routerLink="/login"><span><i class='fas fa-user-alt'></i></span>Sign In</a></li>
                 <ng-template #elseBlock>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdown" role="button" aria-haspopup="true" data-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle py-0" href="javascript:void(0);" id="navbarDropdown" role="button" aria-haspopup="true" data-toggle="dropdown">
                           <span><i class='fas fa-user-alt'></i></span>{{username}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" routerLink="/profile">My Account</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" routerLink="/home" (click)="onLogout()">Sign Out</a>
+                            <a class="dropdown-item" (click)="onLogout()">Sign Out</a>
                         </div>
                     </li>
                 </ng-template>
-            </div> -->
-            <li><a class="nav-link py-0" routerLink="/quickSignup"><span></span>Create account</a></li>
+            </div>
+
+            <!-- <li><a class="nav-link py-0" routerLink="/quickSignup"><span></span>Create account</a></li>
             <div class="divider">.</div>
             <div class="seperateLi">
               <li><a class="nav-link py-0" routerLink="/login"><span></span>Sign In</a></li>
-            </div>
+            </div> -->
 
           </ul>
       </div>

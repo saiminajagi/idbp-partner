@@ -30,8 +30,10 @@ export class LoginComponent implements OnInit {
     this.myservice.sendLoginDetails(myObj)
     .subscribe(
     (data : any) => {
+      console.log(data);
       if(data.status){
-        this.router.navigateByUrl('/dashboard');
+        // this.router.navigateByUrl('/home/hdfc');
+        window.location.href = 'http://localhost:9000/home/hdfc';
       }else{
         alert(data.msg);
       }

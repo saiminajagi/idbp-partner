@@ -35,6 +35,20 @@ export class MyserviceService {
     })
   }
 
+  checkLogin(){
+    return this.http.get<any>('/route/checklogin',{
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    });
+  }
+
+  logout(){
+    return this.http.get<any>('/route/logout',{
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    });
+  }
+
   sendQuickSignUpDetails(obj:any):Observable<any>{
     return this.http.post<any>('/route/quickSignupConfirm',obj,{
       headers :
