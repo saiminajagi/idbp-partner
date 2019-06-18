@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MyserviceService } from '../service/myservice.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  show_partner_profile: any ;
+  show_payment_rules: any;
+  public permitted = false;
 
-  ngOnInit() {
+  constructor(private myservice: MyserviceService, private route: ActivatedRoute) {
+    this.show_partner_profile = this.route.snapshot.data['partner_profile'];
+    console.log(this.show_partner_profile);
   }
+
+  ngOnInit(){
+    if(this.permitted){
+      this.myservice.getPaymentRulesDetails()
+      .subscribe((data: any) => {
+        this.show_payment_rules = data;
+      }, (err) => console.log(err));
+    }
+  }
+
 
 }

@@ -18,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ApiproductsComponent } from './apiproducts/apiproducts.component';
 import { GettingstartedComponent } from './gettingstarted/gettingstarted.component';
 import { RegisterinterestComponent } from './registerinterest/registerinterest.component';
+import { PartnerProfileResolverService } from './profile/profile-resolver.service';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,7 @@ import { RegisterinterestComponent } from './registerinterest/registerinterest.c
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [PartnerProfileResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

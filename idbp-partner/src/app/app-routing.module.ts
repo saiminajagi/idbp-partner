@@ -8,12 +8,13 @@ import { QuicksignupComponent } from './quicksignup/quicksignup.component';
 import { ApiproductsComponent } from './apiproducts/apiproducts.component';
 import { GettingstartedComponent } from './gettingstarted/gettingstarted.component';
 import { RegisterinterestComponent } from './registerinterest/registerinterest.component';
+import { PartnerProfileResolverService } from './profile/profile-resolver.service';
 
 
 const routes: Routes = [
   { path: 'home/:bankname', component: HomeComponent},
   // { path: 'home', component: HomeComponent},
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, resolve : { partner_profile : PartnerProfileResolverService} },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'quickSignup', component: QuicksignupComponent},

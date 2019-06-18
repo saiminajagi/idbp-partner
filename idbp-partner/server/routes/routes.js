@@ -56,6 +56,14 @@ routes.route('/quickSignupConfirm')
         name: req.body.name,
         org : req.body.org,
         pass : hashpwd,
+        amnt : 0,
+        freq : 0,
+        accno : 0,
+        mid : "default",
+        appid : "default",
+        cid : "default",
+        clientID: "default",
+        clientSecret: "default",
         qs : false
     });
     newqs.save();
@@ -474,6 +482,50 @@ function sendmail(email,bank,username,clientID,clientSecret){
         }
         });
 }
+
+routes.route('/profile')
+.get((req,res)=>{
+    var sess = req.session;
+
+    //check what kind of user he is..
+
+    qsmodel.find({email: sess.email},(err,doc)=>{
+      var myObj = {
+        email: doc[0].email,
+        name: doc[0].name,
+        org: doc[0].org,
+        clientID: doc[0].clientID,
+        clientSecret: doc[0].clientSecret
+      }
+      res.json(myObj);
+    })
+});
+
+routes.route('/paymentrulesdetails')
+.post(urlencodedParser,(req,res)=>{
+    console.log("payment rules received");
+
+    qsmodel.findOneAndUpdate({email:req.body.email},{amnt:req.body.amnt, freq:req.body.freq, accno:req.body.accno, mid:req.body.mid, appid:req.body.appid, cid:req.body.cid },{new:true},(err,doc)=>{
+      console.log(err);
+    });
+
+})
+
+.get((req,res)=>{
+  var sess = req.session;
+  qsmodel.find({email: sess.email},(err,doc)=>{
+    var myObj = {
+      amnt: doc[0].amnt,
+      freq: doc[0].freq,
+      accno: doc[0].accno,
+      appid: doc[0].appid,
+      mid: doc[0].mid,
+      cid: doc[0].cid
+    }
+    res.json(myObj);
+  })
+});
+
 
 var upload = multer({dest : __dirname+'./uploads'});
 routes.route('/handlefiles')

@@ -95,4 +95,18 @@ export class MyserviceService {
                         'Accept': 'application/json'})
     })
   }
+
+  getPartnerProfileDetails():Observable<any>{
+    return this.http.get<any>('route/profile', {
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    });
+  }
+
+  getPaymentRulesDetails():Observable<any>{
+    return this.http.get<any>('route/paymentrulesdetails', {
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    });
+  }
 }
