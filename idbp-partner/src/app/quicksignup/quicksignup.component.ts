@@ -33,6 +33,7 @@ export class QuicksignupComponent implements OnInit {
       name: this.QuickSignUpForm.controls.name.value,
       org : this.QuickSignUpForm.controls.org.value
     }
+    
     this.myservice.sendQuickSignUpDetails(myObj)
     .subscribe(
     (data : any) => {
