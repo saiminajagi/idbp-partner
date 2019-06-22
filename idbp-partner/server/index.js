@@ -3,6 +3,7 @@ var path = require('path');
 var session = require('express-session');
 
 var routes = require('./routes/routes');
+var files =require('./routes/file');
 
 var mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
@@ -32,34 +33,11 @@ app.use((req,res,next)=>{
     next();
 });
 app.use('/route',routes);
+app.use('/files',files);
 
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname,'../dist/idbp-partner/index.html'));
 });
-
-// to remove all the expired links. checks every 2 minutes
-// setInterval(() => {
-//     var date = new Date();
-//     var cts = date.getTime(); //current time stamp.
-
-//     usermodel.find({},(err,doc)=>{
-//         var len = doc.length;
-
-//         for(i=0;i<len;++i){
-//             //convert the variable to int .
-//             if(doc[i].ts != "expired"){
-//                 var ts = parseInt(doc[i].ts);
-//                 if(cts - ts >= 86400000){
-//                     if(!doc[i].confirmation){
-//                         //delete the user
-//                         usermodel.findOneAndRemove({ts:ts},(err,doc)=> console.log(err));
-//                     }else  usermodel.findOneAndUpdate({ts: ts},{$set : {ts : "expired"}},{new : true});
-//                 }
-//             }
-//         }
-//     });
-// }, 120000);
-
 
 app.listen(9000);
 console.log("listening to port 9000");
