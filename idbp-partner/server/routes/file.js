@@ -1,12 +1,8 @@
-var express = require('express'); 
+var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var multer = require('multer');
-
-// models--------------------
-
-var partner = require('../models/partnermodel');
 
 var storage = multer.diskStorage({
 	destination:function(req,file,cb){
@@ -28,11 +24,11 @@ files.use(bodyParser.urlencoded({extended:true}));
 
 var sess;
 
-files.route('/upload/:email/:org/:bank')
+files.route('/upload')
 .post(upload.any(),(req,res)=>{
     var sess = req.session;
-    partner.findOneAndUpdate({email:sess.email},{files:true},{new:true},(err,doc)=>{});
-    
+    //partner.findOneAndUpdate({email:sess.email},{files:true},{new:true},(err,doc)=>{});
+
     //convert the files to b64 format and store it in db
     var dirpath = path.join(__dirname,'uploads');
     fs.readdir(dirpath, function(err, items){
@@ -47,20 +43,31 @@ files.route('/upload/:email/:org/:bank')
                 fname = "PAN";
 
             MongoClient.connect('mongodb://localhost:27017/idbp',{ useNewUrlParser: true },(err,client)=>{
-            if(err){ 
+            if(err){
                 console.log("Please check you db connection parameters");
               }else{
                 var db = client.db('idbp');
                 var collection = db.collection('files');
-                collection.insertOne({email:req.params.email,org:req.params.org,filename:fname,file:b64},(err,res)=>{
+                collection.insertOne({email:sess.pemail,org:sess.porg,bank:sess.pbank,filename:fname,file:b64},(err,res)=>{
                     if(err) console.log("error while inserting file in db: "+err);
                 })
               }
             })
-
             //this delets the file
             fs.unlinkSync(recentfile);
         }
+        // add the organisation as a partner
+        MongoClient.connect('mongodb://localhost:27017/idbp',{ useNewUrlParser: true },(err,client)=>{
+          if(err){
+              console.log("Please check you db connection parameters");
+            }else{
+              var db = client.db('idbp');
+              var collection = db.collection('partners');
+              collection.insertOne({email:sess.pemail,name:sess.porg,active: true},(err,res)=>{
+                  if(err) console.log("error while inserting file in db: "+err);
+              })
+            }
+        })
     });
     var bank = req.params.bank;
     res.redirect(`/home/${bank}`);

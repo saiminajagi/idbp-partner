@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if(data.status){
         // this.router.navigateByUrl('/home/hdfc');
-        window.location.href = 'http://localhost:9000/home/hdfc';
+        window.location.href = 'http://idbppartner.bank.com:9000/home/hdfc';
       }else{
         alert(data.msg);
       }
