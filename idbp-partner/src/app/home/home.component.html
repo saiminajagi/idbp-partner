@@ -19,6 +19,22 @@
 </ngb-carousel>
 
 <br><br>
+<div class="container-guide">
+    <div class="container-content">
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>
+            Find out how to get credentials, build a test project, and connect to sandbox.
+          </h3>
+        </div>
+        <div class="col-sm-4">
+          <div class="content-button">
+            <a routerLink="/home">Work with all bank APIs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 
 <div class="apiproductsfull">
   <div class="apiproducts">
@@ -28,15 +44,49 @@
 
   <div class="row">
         <div class="col-sm-4" *ngFor=" let api of apilist">
-            <div class="card">
-                <div class="card-body">
+            <div class="api-card card">
+                <div class="api-card-body card-body">
                   <a routerLink="/home"><h5 class="card-title">{{api | uppercase}}</h5></a>
               </div>
         </div>
     </div>
 </div>
 
-<!--
-<form [formGroup]="tushar" action="/files/fileupload" method="POST" enctype="multipart/form-data">
-  <input formControlName="file" type="file" name="file">
-</form> -->
+<div class="back2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2> ABOUT US </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hello</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <button class="Overview btn services" type="button"> See Services </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hello</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <button class="Overview btn services " type="button"> See Services </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hello</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <button class="Overview btn services " type="button"> See Services </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

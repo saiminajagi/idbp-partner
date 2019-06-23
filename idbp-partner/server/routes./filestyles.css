@@ -1,0 +1,53 @@
+/* .card{
+    margin-top: 10%;
+    border: dashed;
+    border-radius: 10px; 
+}
+
+.header{
+    padding-left: 25%;
+}
+
+.input-group{
+    padding-left: 25%;
+}
+
+input[type="file"]{
+    padding-left:12%;
+} */
+
+.btn{
+    margin-left: 40%;
+    background: #31569b;
+    color: white;
+}
+
+input[type="file"]{
+    border: solid 1px #88898b;
+    padding-left: 30%;
+    padding-top:4px;
+    padding-bottom: 4px;
+    border-radius: 10px;
+}
+
+label{
+    font-weight: bold;
+    color: #204b9b
+}
+
+h4{
+    text-align: center;
+}
+
+.card{
+    margin-top: 20%;
+}
+
+.card-header{
+    background: #153570;
+    color: rgb(246, 249, 250);
+}
+
+.card-body{
+    background: #eaedf1
+}

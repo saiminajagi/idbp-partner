@@ -10,7 +10,7 @@ img{
 .carousel-caption>a{
   text-decoration: none;
   color: #ffffff;
-  background-color: #5A60B8;
+  background-color: #1848a0;
   padding: 6px 10px 6px 10px;
 }
 
@@ -32,16 +32,82 @@ img{
 }
 
 
-.card{
+.api-card{
   border-radius: 0px;
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.card-body{
+
+.api-card-body{
   text-align: center;
   margin-top: 30px;
   margin-bottom: 100px;
 }
-.card-body>a{
+
+.api-card-body>a{
   text-decoration: none;
+}
+
+.back2{
+  margin-top:25px;
+  margin-bottom:25px;
+  background: #153570;
+}
+
+.container-content{
+  margin: 0 25px;
+  text-align: left;
+}
+
+.container-guide{
+  background-color: #ffffff;
+  padding: 50px 0;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+.content-button{
+  display: inline-block;
+  background-color: #143f8c;
+  font-size: 15px;
+  line-height: 1.45;
+  padding: 20px 25px 20px 55px;
+  text-align: left;
+  text-indent: -30px;
+  text-transform: none;
+  white-space: inherit;
+  border-radius: 6px;
+  margin: 0 30px;
+  text-align: left;
+}
+
+.content-button a{
+    margin: 0;
+    max-width: 300px;
+    outline: none;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #fff;
+}
+
+h2{
+  border-bottom: solid 1px white;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+  color: white;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.services{
+  background: #1b4491;
+  color: white;   
+}
+
+.card{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
