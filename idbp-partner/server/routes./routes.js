@@ -4,6 +4,21 @@ var bodyParser = require('body-parser');
 var passwordHash = require('password-hash');
 var multer = require('multer');
 var path = require('path');
+var handlebars = require('handlebars');
+var fs = require('fs');
+
+// to read html file
+var readHTMLFile = function(path, callback) {
+  fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+      if (err) {
+          throw err;
+          callback(err);
+      }
+      else {
+          callback(null, html);
+      }
+  });
+};
 
 var qsmodel = require('../models/qsmodel');
 var apilistmodel = require('../models/apilistmodel');
@@ -413,7 +428,6 @@ routes.route('/partnerfile')
 
 function sendmail(email,bank,username,clientID,clientSecret){
     console.log(clientID+" "+clientSecret+" in mail function");
-    var link = `http://localhost:3000/route/confirm/${email}`;
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -422,62 +436,29 @@ function sendmail(email,bank,username,clientID,clientSecret){
         }
         });
 
-        var mailOptions = {
+        readHTMLFile(path.join(__dirname, '../views/test-api-credentials-after-quick-signup.html'), function(err, html) {
+          var template = handlebars.compile(html);
+          var replacements = {
+               username: `${username}`,
+               bank:`${bank}`,
+               clientID:`${clientID}`,
+               clientSecret:`${clientSecret}`
+          }
+          var htmlToSend = template(replacements);
+          var mailOptions = {
             from: 'tushartdm117@gmail.com',
             to: `${email}`,
-            subject: 'IDBP Bank portal credentials',
+            subject: 'Test API credentials',
             text: 'That was easy!',
-            html : `
-            <html>
-            <head>
-                <style>
-                    .maindiv{
-                        box-shadow: 5px 5px 10px grey;
-                        margin-left: 35%;
-                        border: solid 2px grey;
-                        width: 550px;
-                        margin-top: 20px;
-                        padding-left: 35px;
-                        padding-bottom: 20px;
-                        border-radius: 20px;
-                        padding-top: 10px;
-                    }
-                    h2{
-                        margin-left: 44%;
-                        color:rgb(91, 91, 204);
-                    }
-
-                    a{
-                        text-decoration: none;
-                        color:rgb(83, 134, 6)
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="maindiv">
-                    <h2> IDBP Partner Portal</h2>
-                    <p> Welcome!! you are now successfully registered to ${bank} bank Api Portal (http://localhost:9000/home/${bank}).
-                        You have complete access to all our API's in sandbox environment  </p>
-                    <h4> Here are the next steps: </h4>
-                        <p> - Login to our API Portal (https://portal.9.202.177.31.xip.io/think/sandbox/) with your credentials furnished during registration </p>
-                        <p> - username : ${username} </p>
-                        <p> - explore our APIs and use below credentials to test our APIs </p>
-                        <p> - here are APIkeys for testing our APIs in our sandbox environment </p>
-                        <p> Client ID : ${clientID} </p>
-                        <p> Client Secret : ${clientSecret} </p>
-                        <p> once you create your awesome web or mobile application and test in our sandbox environment you can register interest to use our PROD
-                            environment(more info in Getting started link in our site https://localhost:9000/gettingstarted ) </p>
-                </div>
-            </body>
-        </html> `
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
+            html : htmlToSend
+          };
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+          });
         });
 }
 

@@ -80,7 +80,7 @@ export class MyserviceService {
   }
 
   sendInterest(obj:any):Observable<any>{
-    return this.http.post<any>('http://localhost:3000/route/sendInterest',obj,{
+    return this.http.post<any>('http://idbpportal.bank.com:3000/route/sendInterest',obj,{
       headers:
       new HttpHeaders({'Content-Type':'application/json' })
     })
@@ -89,7 +89,7 @@ export class MyserviceService {
   //   return this.http.post()
   // }
   sendFiles(obj:any):Observable<any>{
-    return this.http.post('http://localhost:3000/files/fileupload',obj,{
+    return this.http.post('http://idbpportal.bank.com:3000/files/fileupload',obj,{
       headers :
       new HttpHeaders({ 'Content-Type':'application/json',
                         'Accept': 'application/json'})
