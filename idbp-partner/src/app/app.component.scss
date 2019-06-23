@@ -1,7 +1,7 @@
 .page-wrap {
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: -70px;
+  margin-bottom: -145px;
 }
 
 .page-wrap:after {
@@ -10,19 +10,41 @@
 }
 
 .site-footer, .page-wrap:after {
-  height: 70px;
+  height: 145px;
 }
 
 .site-footer {
-  background-color: #333030;
-  color: #ffffff;
-  text-align: center;
+  background-color: #e0dcdc !important;
 }
 
 .site-footer a{
-  text-decoration: none;
+  color: #000000;
+  text-decoration: none !important;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
 }
 
-.site-footer p{
-  padding-top: 25px;
+.site-footer ul.social li{
+	padding: 3px 0;
+}
+
+ul.social li a i {
+  margin-right: 5px;
+font-size:25px;
+-webkit-transition: .5s all ease;
+-moz-transition: .5s all ease;
+transition: .5s all ease;
+}
+
+.site-footer ul.social li:hover a i {
+font-size:30px;
+margin-top:-10px;
+}
+
+.site-footer ul.social li a{
+color:#000000;
+}
+
+.site-footer ul.social li a:hover{
+color:#000000;
 }
