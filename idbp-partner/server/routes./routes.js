@@ -432,8 +432,8 @@ function sendmail(email,bank,username,clientID,clientSecret){
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user : 'tushartdm117@gmail.com',
-            pass : 'fcb@rc@M$N321'
+            user : 'ibm.idbp@gmail.com',
+            pass : 'Modified@2017'
         }
         });
 
@@ -447,7 +447,7 @@ function sendmail(email,bank,username,clientID,clientSecret){
           }
           var htmlToSend = template(replacements);
           var mailOptions = {
-            from: 'tushartdm117@gmail.com',
+            from: 'ibm.idbp@gmail.com',
             to: `${email}`,
             subject: 'Test API credentials',
             text: 'That was easy!',
@@ -483,7 +483,7 @@ routes.route('/profile')
 
 routes.route('/paymentrulesdetails')
 .post(urlencodedParser,(req,res)=>{
-    console.log("payment rules received");
+    console.log("payment rules received to partner");
 
     qsmodel.findOneAndUpdate({email:req.body.email},{ruleset: true, amnt:req.body.amnt, freq:req.body.freq, accno:req.body.accno, mid:req.body.mid, appid:req.body.appid, cid:req.body.cid },{new:true},(err,doc)=>{
       console.log(err);

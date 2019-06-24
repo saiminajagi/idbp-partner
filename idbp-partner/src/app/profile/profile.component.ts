@@ -25,15 +25,13 @@ export class ProfileComponent implements OnInit {
     .subscribe((data)=>{
       console.log(data)
       this.permitted = data;
+      if(this.permitted){
+        this.myservice.getPaymentRulesDetails()
+        .subscribe((data: any) => {
+          this.show_payment_rules = data;
+          console.log(JSON.stringify(this.show_partner_profile) + 'business rules received at partner profile');
+        }, (err) => console.log(err));
+      }
     },(err)=>console.log(err));
-
-    if(this.permitted){
-      this.myservice.getPaymentRulesDetails()
-      .subscribe((data: any) => {
-        this.show_payment_rules = data;
-      }, (err) => console.log(err));
-    }
   }
-
-
 }
