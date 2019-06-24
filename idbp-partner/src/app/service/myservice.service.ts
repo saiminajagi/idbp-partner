@@ -109,4 +109,11 @@ export class MyserviceService {
       new HttpHeaders({ 'Content-Type':'application/json'})
     });
   }
+
+  checkPermitted(){
+    return this.http.get<any>('/route/checkPermitted',{
+      headers :
+      new HttpHeaders({ 'Content-Type':'application/json'})
+    })
+  }
 }

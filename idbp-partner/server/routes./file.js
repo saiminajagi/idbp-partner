@@ -27,49 +27,58 @@ var sess;
 files.route('/upload')
 .post(upload.any(),(req,res)=>{
     var sess = req.session;
-    //partner.findOneAndUpdate({email:sess.email},{files:true},{new:true},(err,doc)=>{});
 
     //convert the files to b64 format and store it in db
     var dirpath = path.join(__dirname,'uploads');
     fs.readdir(dirpath, function(err, items){
+      var files_array = [];
         for (var i=0; i<items.length; i++) {
             recentfile = path.join(__dirname,'uploads',items[i]);
+            console.log("recent file: "+recentfile);
             var b64 = new Buffer(fs.readFileSync(recentfile)).toString("base64");
+            files_array.push(b64);
 
-            var fname;
-            if(i==0)
-                fname = "aadhaar";
-            else if(i==1)
-                fname = "PAN";
-
-            MongoClient.connect('mongodb://localhost:27017/idbp',{ useNewUrlParser: true },(err,client)=>{
-            if(err){
-                console.log("Please check you db connection parameters");
-              }else{
-                var db = client.db('idbp');
-                var collection = db.collection('files');
-                collection.insertOne({email:sess.pemail,org:sess.porg,bank:sess.pbank,filename:fname,file:b64},(err,res)=>{
-                    if(err) console.log("error while inserting file in db: "+err);
-                })
-              }
-            })
             //this delets the file
             fs.unlinkSync(recentfile);
         }
-        // add the organisation as a partner
+
         MongoClient.connect('mongodb://localhost:27017/idbp',{ useNewUrlParser: true },(err,client)=>{
           if(err){
               console.log("Please check you db connection parameters");
             }else{
               var db = client.db('idbp');
-              var collection = db.collection('partners');
-              collection.insertOne({email:sess.pemail,name:sess.porg,active: true},(err,res)=>{
+              var collection = db.collection('files');
+              collection.insertOne({email:sess.pemail,org:sess.porg,bank:sess.pbank,filename:"file",file:files_array[0]},(err,res)=>{
+                  if(err) console.log("error while inserting file in db: "+err);
+              })
+            }
+          })
+
+          MongoClient.connect('mongodb://localhost:27017/idbp',{ useNewUrlParser: true },(err,client)=>{
+          if(err){
+              console.log("Please check you db connection parameters");
+            }else{
+              var db = client.db('idbp');
+              var collection = db.collection('files');
+              collection.insertOne({email:sess.pemail,org:sess.porg,bank:sess.pbank,filename:"file",file:files_array[1]},(err,res)=>{
+                  if(err) console.log("error while inserting file in db: "+err);
+              })
+            }
+          })
+        // add the docs to pending docs
+        MongoClient.connect('mongodb://localhost:27017/idbp',{ useNewUrlParser: true },(err,client)=>{
+          if(err){
+              console.log("Please check you db connection parameters");
+            }else{
+              var db = client.db('idbp');
+              var collection = db.collection('docs');
+              collection.insertOne({email:sess.pemail,org:sess.porg},(err,res)=>{
                   if(err) console.log("error while inserting file in db: "+err);
               })
             }
         })
     });
-    var bank = req.params.bank;
+    var bank = sess.pbank;
     res.redirect(`/home/${bank}`);
 
 })

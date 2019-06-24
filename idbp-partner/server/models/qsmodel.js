@@ -13,7 +13,8 @@ var api = mongoose.Schema({
     cid : String,
     clientID: String,
     clientSecret: String,
-    qs : Boolean
+    qs : Boolean,
+    ruleset : Boolean
 },{
     timestamp : true
 });

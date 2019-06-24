@@ -78,7 +78,8 @@ routes.route('/quickSignupConfirm')
         cid : "default",
         clientID: "default",
         clientSecret: "default",
-        qs : false
+        qs : false,
+        ruleset: false
     });
     newqs.save();
 
@@ -484,7 +485,7 @@ routes.route('/paymentrulesdetails')
 .post(urlencodedParser,(req,res)=>{
     console.log("payment rules received");
 
-    qsmodel.findOneAndUpdate({email:req.body.email},{amnt:req.body.amnt, freq:req.body.freq, accno:req.body.accno, mid:req.body.mid, appid:req.body.appid, cid:req.body.cid },{new:true},(err,doc)=>{
+    qsmodel.findOneAndUpdate({email:req.body.email},{ruleset: true, amnt:req.body.amnt, freq:req.body.freq, accno:req.body.accno, mid:req.body.mid, appid:req.body.appid, cid:req.body.cid },{new:true},(err,doc)=>{
       console.log(err);
     });
 
@@ -513,6 +514,20 @@ routes.route('/setDocs/:email/:org/:bank')
   sess.pbank = req.params.bank;
 
   res.sendFile(path.join(__dirname,'fileupload.html'));
+})
+
+routes.route('/checkPermitted')
+.get((req,res)=>{
+  var sess = req.session;
+
+  qsmodel.find({email:sess.email},(err,doc)=>{
+    if(doc[0]){
+      if(doc[0].ruleset)
+        res.json(1);
+      else
+        res.json(0);
+    }
+  })
 })
 
 

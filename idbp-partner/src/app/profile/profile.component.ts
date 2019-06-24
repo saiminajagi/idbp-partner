@@ -21,6 +21,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.myservice.checkPermitted()
+    .subscribe((data)=>{
+      console.log(data)
+      this.permitted = data;
+    },(err)=>console.log(err));
+
     if(this.permitted){
       this.myservice.getPaymentRulesDetails()
       .subscribe((data: any) => {
